@@ -1,39 +1,44 @@
 import { useContext } from 'react';
-import  { CartContext} from '../../context/cart.context'
-import CheckOutItem from '../../component/checkout-item/checkout-item.component'
-import './checkout.style.scss'
 
-const CheckOut =()=>{
+import { CartContext } from '../../contexts/cart.context';
 
-    const {cartItems,cartTotal} = useContext(CartContext);
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
-    return(
-        <div className='checkout-container'>
-            <div className='checkout-header'>
-                <div className='header-block'>
-                    <span>Product</span>
-                </div>
-                <div className='header-block'>
-                    <span>Description</span>
-                </div>
-                <div className='header-block'>
-                    <span>Quantity</span>
-                </div>
-                <div className='header-block'>
-                    <span>Price</span>
-                </div>
-                <div className='header-block'>
-                    <span>Remove</span>
-                </div>
-            </div>
-            {
-                cartItems.map((cartItem)=>(
-                    <CheckOutItem key={cartItem.id} cartItem={cartItem} />
-                ))
-            }
-        <span className='total'>Total: ${cartTotal}</span>
-        </div>
-    )
-}
+import {
+  CheckoutContainer,
+  CheckoutHeader,
+  HeaderBlock,
+  Total,
+} from './checkout.styles';
 
-export default CheckOut;
+const Checkout = () => {
+  const { cartItems, cartTotal } = useContext(CartContext);
+
+  return (
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <HeaderBlock>
+          <span>Product</span>
+        </HeaderBlock>
+        <HeaderBlock>
+          <span>Description</span>
+        </HeaderBlock>
+        <HeaderBlock>
+          <span>Quantity</span>
+        </HeaderBlock>
+        <HeaderBlock>
+          <span>Price</span>
+        </HeaderBlock>
+        <HeaderBlock>
+          <span>Remove</span>
+        </HeaderBlock>
+      </CheckoutHeader>
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
+      <Total>Total: ${cartTotal}</Total>
+    </CheckoutContainer>
+  );
+};
+
+export default Checkout;
